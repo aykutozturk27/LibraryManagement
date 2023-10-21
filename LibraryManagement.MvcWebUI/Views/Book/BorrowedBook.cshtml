@@ -1,0 +1,33 @@
+﻿@model List<Book>
+@{
+    ViewData["Title"] = "BorrowedBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mt-3">
+    <table class="table table-responsive table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Kitap Adı</th>
+                <th>Yazarı</th>
+                <th>ISBN</th>
+                <th>Alış Tarihi</th>
+                <th>Geri Veriliş Tarihi</th>
+                <th>Kitabı Alan Kulanıcı</th>
+            </tr>
+        </thead>
+        @foreach (var personal in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@personal.BookName</td>
+                    <td>@personal.Author</td>
+                    <td>@personal.ISBN</td>
+                    <td>@personal.ReceivingDate</td>
+                    <td>@personal.ReturnDate</td>
+                    <td>@personal.Personal?.FirstName @personal.Personal?.LastName</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

@@ -1,0 +1,57 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Book" asp-action="Add" method="post">
+    <div class="form-group row">
+        <label asp-for="BookName" class="col-sm-4 form-label">Kitap Adı</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" asp-for="BookName" placeholder="Kitap Adı" />
+            <span asp-validation-for="BookName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row mt-3">
+        <label asp-for="Author" class="col-sm-4 form-label">Kitap Yazarı</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" asp-for="Author" placeholder="Kitap Yazarı" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row mt-3">
+        <label asp-for="ISBN" class="col-sm-4 form-label">ISBN</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" asp-for="ISBN" placeholder="ISBN" />
+            <span asp-validation-for="ISBN" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row mt-3">
+        <label asp-for="ReceivingDate" class="col-sm-4 form-label">Alış Tarihi</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" asp-for="ReceivingDate" placeholder="Alış Tarihi" />
+            <span asp-validation-for="ReceivingDate" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row mt-3">
+        <label asp-for="ReturnDate" class="col-sm-4 form-label">Geri Dönüş Tarihi</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" asp-for="ReturnDate" placeholder="Geri Dönüş Tarihi" />
+            <span asp-validation-for="ReturnDate" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row mt-3">
+        <label asp-for="Personal.FullName" class="col-sm-4 form-label">Kitabı alan kullanıcı</label>
+        <div class="col-sm-8">
+            @Html.DropDownListFor(x => x.Personal.FullName, ViewBag.PersonalList as SelectList, "Litfen kitabı alan kullanıcıyı seçiniz...", new { @class = "form-control" })
+            <span asp-validation-for="Personal.FullName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group mt-3 d-grid gap-2 col-4 mx-auto">
+        <button type="submit" class="btn btn-primary" id="btnList">Ekle</button>
+    </div>
+</form>

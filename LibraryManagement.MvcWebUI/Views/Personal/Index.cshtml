@@ -1,0 +1,35 @@
+﻿@model List<Personal>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-group">
+    <div class="form-group mt-3 d-grid gap-2 col-4 mx-auto">
+        <a asp-controller="Personal" asp-action="Add" class="btn btn-primary">Ekle</a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <table class="table table-responsive table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Adı</th>
+                <th>Soyadı</th>
+                <th>TC</th>
+                <th>Telefon</th>
+            </tr>
+        </thead>
+        @foreach (var personal in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@personal.FirstName</td>
+                    <td>@personal.LastName</td>
+                    <td>@personal.IdentityNumber</td>
+                    <td>@personal.PhoneNumber</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

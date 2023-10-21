@@ -1,0 +1,53 @@
+﻿@model List<Book>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+<div class="form-group">
+    <div class="form-group mt-3 d-grid gap-2 col-4 mx-auto">
+        <a asp-controller="Book" asp-action="Add" class="btn btn-primary">Ekle</a>
+        <a asp-controller="Book" asp-action="BorrowedBook" class="btn btn-primary">Ödünç Alınan Kitapların Listesi</a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <table class="table table-bordered table-striped" id="bookListTable">
+        <thead>
+            <tr>
+                <th>Kitap Adı</th>
+                <th>Yazarı</th>
+                <th>ISBN</th>
+                <th>Alış Tarihi</th>
+                <th>Geri Veriliş Tarihi</th>
+                @* <th>Kitabı Alan Kulanıcı</th> *@
+                @* <th>Ödünç Al</th> *@
+            </tr>
+        </thead>
+        @* @foreach (var book in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@book.BookName</td>
+                    <td>@book.Author</td>
+                    <td>@book.ISBN</td>
+                    <td>@book.ReceivingDate</td>
+                    <td>@book.ReturnDate</td>
+                    <td>@book.Personal?.FirstName @book.Personal?.LastName</td>
+                    <td>
+                        <input data-isBorrowedValue="@book.IsBorrowed" data-identityValue="@book.Personal?.IdentityNumber"
+                               type="submit" id="btnSetBookBorrowed" class="btn btn-danger" value="Ödünç Al" />
+                    </td>
+                </tr>
+            </tbody>
+        } *@
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables/js/datatables.bootstrap4.min.js"></script>
+    <script src="~/js/book.js"></script>
+}
