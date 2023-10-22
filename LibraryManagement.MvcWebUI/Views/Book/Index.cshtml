@@ -4,50 +4,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+<div ng-controller="BookController">
+    <div class="row">
+        <div class="form-group mt-3 d-grid gap-2 col-4 mx-auto">
+            <a asp-controller="Book" asp-action="Add" class="btn btn-primary">Ekle</a>
+            <a asp-controller="Book" asp-action="BorrowedBook" class="btn btn-primary">Ödünç Alınan Kitapların Listesi</a>
+            <a asp-controller="Book" asp-action="BookOutsideLibrary" class="btn btn-primary">Kütüphane Dışında Geçirilen Kitapların Listesi</a>
+        </div>
+    </div>
 
-<div class="form-group">
-    <div class="form-group mt-3 d-grid gap-2 col-4 mx-auto">
-        <a asp-controller="Book" asp-action="Add" class="btn btn-primary">Ekle</a>
-        <a asp-controller="Book" asp-action="BorrowedBook" class="btn btn-primary">Ödünç Alınan Kitapların Listesi</a>
+    <div class="table table-responsive">
+        <div class="tile-body p-10">
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <div class="row form-horizontal form-group-sm">
+                        <div class="col-sm-12">
+                            <div loading-container="tableBookParams.settings().$loading">
+                                <table ng-table="tableBookParams" class="table table-condensed table-bordered table-striped" ng-form="tableBookForm" disable-filter="isAdding" demo-tracked-table="tableTracker">
+                                    <tr ng-repeat="row in $data" ng-form="rowBookForm" demo-tracked-table-row="row">
+                                        <td data-title="'Kitap Adı'" filter="{BookName: 'text'}" sortable="'BookName'" ng-switch="row.isEditing" ng-class="BookName.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="BookName" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.BookName}}</span>
+                                        </td>
+                                        <td data-title="'Yazarı'" filter="{Author: 'text'}" sortable="'Author'" ng-switch="row.isEditing" ng-class="Author.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="Author" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.Author}}</span>
+                                        </td>
+                                        <td data-title="'ISBN'" filter="{ISBN: 'text'}" sortable="'ISBN'" ng-switch="row.isEditing" ng-class="ISBN.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="ISBN" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.ISBN}}</span>
+                                        </td>
+                                        <td data-title="'Alış Tarihi'" filter="{ReceivingDate: 'text'}" sortable="'ReceivingDate'" ng-switch="row.isEditing" ng-class="ReceivingDate.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="ReceivingDate" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.ReceivingDate | date:'dd-MM-yyyy hh:MM'}}</span>
+                                        </td>
+                                        <td data-title="'Geri Veriliş Tarihi'" filter="{ReturnDate: 'text'}" sortable="'ReturnDate'" ng-switch="row.isEditing" ng-class="ReturnDate.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="ReturnDate" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.ReturnDate | date:'dd-MM-yyyy hh:MM'}}</span>
+                                        </td>
+                                        @* <td data-title="'Kitabı Alan Kulanıcı Id'" filter="{PersonalId: 'text'}" sortable="'PersonalId'" ng-switch="row.isEditing" ng-class="PersonalId.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="PersonalId" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.PersonalId}}</span>
+                                        </td> *@
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row mt-3">
-    <table class="table table-bordered table-striped" id="bookListTable">
-        <thead>
-            <tr>
-                <th>Kitap Adı</th>
-                <th>Yazarı</th>
-                <th>ISBN</th>
-                <th>Alış Tarihi</th>
-                <th>Geri Veriliş Tarihi</th>
-                @* <th>Kitabı Alan Kulanıcı</th> *@
-                @* <th>Ödünç Al</th> *@
-            </tr>
-        </thead>
-        @* @foreach (var book in Model)
-        {
-            <tbody>
-                <tr>
-                    <td>@book.BookName</td>
-                    <td>@book.Author</td>
-                    <td>@book.ISBN</td>
-                    <td>@book.ReceivingDate</td>
-                    <td>@book.ReturnDate</td>
-                    <td>@book.Personal?.FirstName @book.Personal?.LastName</td>
-                    <td>
-                        <input data-isBorrowedValue="@book.IsBorrowed" data-identityValue="@book.Personal?.IdentityNumber"
-                               type="submit" id="btnSetBookBorrowed" class="btn btn-danger" value="Ödünç Al" />
-                    </td>
-                </tr>
-            </tbody>
-        } *@
-    </table>
-</div>
 
 @section Scripts{
-    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
-    <script src="~/lib/datatables/js/datatables.bootstrap4.min.js"></script>
-    <script src="~/js/book.js"></script>
+    <script src="~/js/pages/book.js"></script>
 }

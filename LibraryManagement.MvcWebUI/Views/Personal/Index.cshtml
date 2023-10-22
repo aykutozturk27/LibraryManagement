@@ -4,32 +4,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="form-group">
-    <div class="form-group mt-3 d-grid gap-2 col-4 mx-auto">
-        <a asp-controller="Personal" asp-action="Add" class="btn btn-primary">Ekle</a>
+<div ng-controller="PersonalController">
+    <div class="row">
+        <div class="form-group mt-3 d-grid gap-2 col-4 mx-auto">
+            <a asp-controller="Personal" asp-action="Add" class="btn btn-primary">Ekle</a>
+        </div>
+    </div>
+
+    <div class="table table-responsive">
+        <div class="tile-body p-10">
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <div class="row form-horizontal form-group-sm">
+                        <div class="col-sm-12">
+                            <div loading-container="tablePersonalParams.settings().$loading">
+                                <table ng-table="tablePersonalParams" class="table table-condensed table-bordered table-striped" ng-form="tablePersonalForm" disable-filter="isAdding" demo-tracked-table="tableTracker">
+                                    <tr ng-repeat="row in $data" ng-form="rowPersonalForm" demo-tracked-table-row="row">
+                                        <td data-title="'Adı'" filter="{FirstName: 'text'}" sortable="'FirstName'" ng-switch="row.isEditing" ng-class="FirstName.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="FirstName" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.FirstName}}</span>
+                                        </td>
+                                        <td data-title="'Soyadı'" filter="{LastName: 'text'}" sortable="'LastName'" ng-switch="row.isEditing" ng-class="LastName.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="LastName" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.LastName}}</span>
+                                        </td>
+                                       @*  <td data-title="'ISBN'" filter="{ISBN: 'text'}" sortable="'ISBN'" ng-switch="row.isEditing" ng-class="ISBN.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="ISBN" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.ISBN}}</span>
+                                        </td> *@
+                                        <td data-title="'TC'" filter="{IdentityNumber: 'text'}" sortable="'IdentityNumber'" ng-switch="row.isEditing" ng-class="IdentityNumber.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="IdentityNumber" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.IdentityNumber}}</span>
+                                        </td>
+                                        <td data-title="'Telefon'" filter="{PhoneNumber: 'text'}" sortable="'PhoneNumber'" ng-switch="row.isEditing" ng-class="PhoneNumber.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="PhoneNumber" demo-tracked-table-cell>
+                                            <span ng-switch-default class="editable-text">{{row.PhoneNumber}}</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row mt-3">
-    <table class="table table-responsive table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Adı</th>
-                <th>Soyadı</th>
-                <th>TC</th>
-                <th>Telefon</th>
-            </tr>
-        </thead>
-        @foreach (var personal in Model)
-        {
-            <tbody>
-                <tr>
-                    <td>@personal.FirstName</td>
-                    <td>@personal.LastName</td>
-                    <td>@personal.IdentityNumber</td>
-                    <td>@personal.PhoneNumber</td>
-                </tr>
-            </tbody>
-        }
-    </table>
-</div>
+@section Scripts{
+    <script src="~/js/pages/personal.js"></script>
+}

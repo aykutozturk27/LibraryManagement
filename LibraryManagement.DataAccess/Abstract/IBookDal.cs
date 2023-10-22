@@ -5,5 +5,6 @@ namespace LibraryManagement.DataAccess.Abstract
 {
     public interface IBookDal : IEntityRepository<Book>
     {
+        List<Book> GetBookOutsideLibraryGroupedISBN();
     }
 }

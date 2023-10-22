@@ -3,7 +3,6 @@ using LibraryManagement.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LibraryManagement.MvcWebUI.Controllers
 {
@@ -21,10 +20,35 @@ namespace LibraryManagement.MvcWebUI.Controllers
             return View();
         }
 
-        public JsonResult GetBookList()
+        public IActionResult BorrowedBook()
+        {
+            return View();
+        }
+
+        public IActionResult BookOutsideLibrary()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public string GetBookList()
         {
             var bookList = _bookService.GetBookWithPersonalList();
-            return Json(bookList);
+            return JsonConvert.SerializeObject(bookList);
+        }
+
+        [HttpPost]
+        public string GetBorrowedBookList()
+        {
+            var list = _bookService.GetBorrowedBookList();
+            return JsonConvert.SerializeObject(list);
+        }
+
+        [HttpPost]
+        public string GetBookOutsideLibraryGroupedISBN()
+        {
+            var bookOutsideLibrary = _bookService.GetBookOutsideLibraryGroupedISBN();
+            return JsonConvert.SerializeObject(bookOutsideLibrary);
         }
 
         public IActionResult Add()
@@ -51,12 +75,6 @@ namespace LibraryManagement.MvcWebUI.Controllers
                 }
             }
             return View(book);
-        }
-
-        public IActionResult BorrowedBook()
-        {
-            var list = _bookService.GetBorrowedBookList();
-            return View(list);
         }
 
         [HttpPost]

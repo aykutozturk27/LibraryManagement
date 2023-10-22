@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.Business.Abstract;
 using LibraryManagement.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace LibraryManagement.MvcWebUI.Controllers
 {
@@ -15,8 +16,14 @@ namespace LibraryManagement.MvcWebUI.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public string GetPersonalList()
+        {
             var list = _personalService.GetAll();
-            return View(list);
+            return JsonConvert.SerializeObject(list);
         }
 
         public IActionResult Add()

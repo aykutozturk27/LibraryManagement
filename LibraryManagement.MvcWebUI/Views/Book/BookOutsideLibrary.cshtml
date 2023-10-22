@@ -1,10 +1,11 @@
 ﻿@model List<Book>
 @{
-    ViewData["Title"] = "BorrowedBook";
+    ViewData["Title"] = "BookOutsideLibrary";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="BorrowedBookController">
+
+<div ng-controller="BookOutsideLibraryController">
     <div class="row mt-3">
         <div class="table table-responsive">
             <div class="tile-body p-10">
@@ -12,9 +13,9 @@
                     <div class="col-sm-12 table-responsive">
                         <div class="row form-horizontal form-group-sm">
                             <div class="col-sm-12">
-                                <div loading-container="tableBorrowedBookParams.settings().$loading">
-                                    <table ng-table="tableBorrowedBookParams" class="table table-condensed table-bordered table-striped" ng-form="tableBorrowedBookForm" disable-filter="isAdding" demo-tracked-table="tableTracker">
-                                        <tr ng-repeat="row in $data" ng-form="rowBorrowedBookForm" demo-tracked-table-row="row">
+                                <div loading-container="tableBookOutsideLibraryParams.settings().$loading">
+                                    <table ng-table="tableBookOutsideLibraryParams" class="table table-condensed table-bordered table-striped" ng-form="tableBookOutsideLibraryForm" disable-filter="isAdding" demo-tracked-table="tableTracker">
+                                        <tr ng-repeat="row in $data" ng-form="rowBookOutsideLibraryForm" demo-tracked-table-row="row">
                                             <td data-title="'Kitap Adı'" filter="{BookName: 'text'}" sortable="'BookName'" ng-switch="row.isEditing" ng-class="BookName.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="BookName" demo-tracked-table-cell>
                                                 <span ng-switch-default class="editable-text">{{row.BookName}}</span>
                                             </td>
@@ -46,5 +47,5 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/pages/borrowedbook.js"></script>
+    <script src="~/js/pages/bookOutsideLibrary.js"></script>
 }
